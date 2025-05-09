@@ -1,0 +1,268 @@
+{
+  "dining_options": [
+    {
+      "name": "Thames Street Oyster House (Baltimore)",
+      "category": "Seafood, Michelin Bib Gourmand",
+      "price": "$$$",
+      "rating": "****½ (4.5/5, 2,500+ reviews)",
+      "description": "Outstanding seafood in charming Fells Point. Known for exceptional raw bar and traditional Chesapeake dishes with an upscale twist.",
+      "website": "https://www.thamesstreetoysterhouse.com",
+      "address": "1728 Thames St, Baltimore, MD 21231",
+      "good_for": "Seafood lovers, special meal"
+    },
+    {
+      "name": "Ekiben (Baltimore)",
+      "category": "Asian Fusion",
+      "price": "$$",
+      "rating": "***** (4.8/5, 1,100+ reviews)",
+      "description": "Cult favorite known for steamed bun sandwiches and small plates with Taiwanese, Thai, and Korean influences.",
+      "website": "https://www.ekibenbaltimore.com",
+      "address": "1622 Eastern Ave, Baltimore, MD 21231",
+      "good_for": "Casual lunch/dinner, foodie experience"
+    },
+    {
+      "name": "La Cuchara (Baltimore)",
+      "category": "Basque, Spanish",
+      "price": "$$$",
+      "rating": "****½ (4.5/5, 650+ reviews)",
+      "description": "Upscale Basque restaurant with wood-fired cooking, excellent pintxos, and a sophisticated wine list.",
+      "website": "https://www.lacucharabaltimore.com",
+      "address": "3600 Clipper Mill Rd, Baltimore, MD 21211",
+      "good_for": "Group dining, sharing plates"
+    },
+    {
+      "name": "Clavel (Baltimore)",
+      "category": "Mexican, Mezcaleria",
+      "price": "$$",
+      "rating": "****½ (4.5/5, 1,000+ reviews)",
+      "description": "Authentic Sinaloan cuisine with house-made tortillas, exceptional ceviche, and one of the best mezcal selections on the East Coast.",
+      "website": "https://www.barclavel.com",
+      "address": "225 W 23rd St, Baltimore, MD 21211",
+      "good_for": "Casual dinner, excellent cocktails"
+    },
+    {
+      "name": "The Food Market (Baltimore)",
+      "category": "American, New American",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 1,300+ reviews)",
+      "description": "Modern comfort food with creative twists in a buzzy, industrial-chic space. Popular for brunch and dinner.",
+      "website": "https://www.thefoodmarketbaltimore.com",
+      "address": "1017 W 36th St, Baltimore, MD 21211",
+      "good_for": "Trendy dinner, variety of options"
+    },
+    {
+      "name": "Petit Louis Bistro (Baltimore)",
+      "category": "French",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 700+ reviews)",
+      "description": "Classic French bistro with charming atmosphere, traditional dishes like coq au vin and steak frites, and an all-French wine list.",
+      "website": "https://www.petitlouis.com",
+      "address": "4800 Roland Ave, Baltimore, MD 21210",
+      "good_for": "Classic French cuisine, romantic setting"
+    },
+    {
+      "name": "Cinghiale (Baltimore)",
+      "category": "Italian",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 600+ reviews)",
+      "description": "Upscale Northern Italian cuisine with excellent pasta, an award-winning wine list, and elegant dining rooms overlooking the harbor.",
+      "website": "https://www.cgeno.com",
+      "address": "822 Lancaster St, Baltimore, MD 21202",
+      "good_for": "Upscale dinner, wine enthusiasts"
+    },
+    {
+      "name": "Faidley Seafood (Baltimore)",
+      "category": "Seafood",
+      "price": "$$",
+      "rating": "****½ (4.5/5, 1,000+ reviews)",
+      "description": "Historic market stall (since 1886) known for award-winning lump crab cakes and fresh seafood. A Baltimore institution.",
+      "website": "https://www.faidleyscrabcakes.com",
+      "address": "400 W Lexington St, Baltimore, MD 21201",
+      "good_for": "Casual lunch, authentic Baltimore experience"
+    },
+    {
+      "name": "Miss Shirley's Cafe (Baltimore)",
+      "category": "Breakfast, Southern",
+      "price": "$$",
+      "rating": "**** (4.0/5, 2,000+ reviews)",
+      "description": "Beloved breakfast and brunch spot with Southern-inspired dishes like crab benedict and coconut cream-stuffed French toast.",
+      "website": "https://www.missshirleys.com",
+      "address": "750 E Pratt St, Baltimore, MD 21202",
+      "good_for": "Breakfast, brunch"
+    },
+    {
+      "name": "LP Steamers (Baltimore)",
+      "category": "Seafood, Crab House",
+      "price": "$$",
+      "rating": "**** (4.0/5, 850+ reviews)",
+      "description": "No-frills crab house serving steamed Maryland blue crabs, crab cakes, and other seafood favorites. Rooftop deck with city views.",
+      "website": "https://www.lpsteamers.com",
+      "address": "1100 E Fort Ave, Baltimore, MD 21230",
+      "good_for": "Authentic crab feast, casual dining"
+    },
+    {
+      "name": "Hersh's Pizza & Drinks (Baltimore)",
+      "category": "Pizza, Italian",
+      "price": "$$",
+      "rating": "****½ (4.5/5, 400+ reviews)",
+      "description": "Neapolitan-style pizzas with creative toppings, craft cocktails, and homemade pasta in a relaxed setting.",
+      "website": "http://www.hershspizza.com",
+      "address": "1843 Light St, Baltimore, MD 21230",
+      "good_for": "Casual dinner, pizza lovers"
+    },
+    {
+      "name": "Sotto Sopra (Baltimore)",
+      "category": "Italian",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 550+ reviews)",
+      "description": "Handmade pasta, seafood, and meat dishes in an elegant setting with murals and occasional opera nights.",
+      "website": "http://www.sottosopra.us",
+      "address": "405 N Charles St, Baltimore, MD 21201",
+      "good_for": "Italian cuisine, special occasions"
+    },
+    {
+      "name": "Gertrude's at the BMA (Baltimore)",
+      "category": "American",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 600+ reviews)",
+      "description": "Modern American cuisine in the Baltimore Museum of Art with a patio and locally focused menu.",
+      "website": "https://www.gertrudesbaltimore.com",
+      "address": "10 Art Museum Dr, Baltimore, MD 21218",
+      "good_for": "Museum dining, cultural day out"
+    },
+    {
+      "name": "Blue Moon Cafe (Baltimore)",
+      "category": "Breakfast, Diner",
+      "price": "$$",
+      "rating": "**** (4.0/5, 1,400+ reviews)",
+      "description": "Colorful 24-hour diner known for Cap'n Crunch French toast, hearty breakfast platters, and quirky vibes.",
+      "website": "https://www.bluemoonbaltimore.com",
+      "address": "1621 Aliceanna St, Baltimore, MD 21231",
+      "good_for": "Late night breakfast, hangover cure"
+    },
+    {
+      "name": "Le Diplomate (DC)",
+      "category": "French",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 3,000+ reviews)",
+      "description": "Parisian-style brasserie with steak frites, onion soup, and charming outdoor seating.",
+      "website": "https://www.lediplomatedc.com",
+      "address": "1601 14th St NW, Washington, DC 20009",
+      "good_for": "French cuisine, people watching"
+    },
+    {
+      "name": "Maketto (DC)",
+      "category": "Asian Fusion",
+      "price": "$$",
+      "rating": "**** (4.0/5, 1,100+ reviews)",
+      "description": "A combined café, boutique, and Cambodian/Taiwanese fusion restaurant with trend-forward street food.",
+      "website": "https://www.maketto1351.com",
+      "address": "1351 H St NE, Washington, DC 20002",
+      "good_for": "Trendy dining, cultural vibe"
+    },
+    {
+      "name": "Puerto 511 (Baltimore)",
+      "category": "Peruvian",
+      "price": "$$",
+      "rating": "****½ (4.5/5, 450+ reviews)",
+      "description": "Intimate Peruvian restaurant with exceptional ceviche, rotisserie chicken, and flavorful traditional dishes.",
+      "website": "http://www.puerto511.com",
+      "address": "102 W Clay St, Baltimore, MD 21201",
+      "good_for": "Authentic Peruvian, intimate dining"
+    }
+  ],
+  "shopping_locations": [
+    {
+      "name": "Georgetown Shopping District (DC)",
+      "category": "Historic Shopping",
+      "price": "$$-$$$",
+      "rating": "**** (4.6/5, 1,100+ reviews)",
+      "description": "Charming cobblestone streets lined with upscale stores, national retailers, and unique boutiques. A DC favorite.",
+      "website": "https://www.georgetowndc.com",
+      "address": "M St NW, Washington, DC 20007",
+      "good_for": "Shopping, sightseeing, cafes"
+    },
+    {
+      "name": "Harbor East (Baltimore)",
+      "category": "Upscale Shopping",
+      "price": "$$-$$$",
+      "rating": "**** (4.3/5, 500+ reviews)",
+      "description": "Waterfront shopping and dining district with designer boutiques, national retailers, and scenic harbor views.",
+      "website": "https://www.harboreast.com",
+      "address": "1000 Lancaster St, Baltimore, MD 21202",
+      "good_for": "Upscale retail, harbor stroll"
+    },
+    {
+      "name": "Lexington Market (Baltimore)",
+      "category": "Historic Market",
+      "price": "$",
+      "rating": "**** (4.2/5, 1,300+ reviews)",
+      "description": "America's oldest public market recently renovated with 50+ food and specialty vendors. A true Baltimore landmark.",
+      "website": "https://www.lexingtonmarket.com",
+      "address": "400 W Lexington St, Baltimore, MD 21201",
+      "good_for": "Foodies, historic shopping"
+    },
+    {
+      "name": "CityCenterDC (DC)",
+      "category": "Luxury Shopping",
+      "price": "$$$",
+      "rating": "**** (4.4/5, 600+ reviews)",
+      "description": "Stylish, open-air shopping complex featuring global luxury brands and modern architecture in downtown DC.",
+      "website": "https://www.citycenterdc.com",
+      "address": "825 10th St NW, Washington, DC 20001",
+      "good_for": "Luxury shopping, modern ambiance"
+    },
+    {
+      "name": "Union Market (DC)",
+      "category": "Boutique Shopping & Food Hall",
+      "price": "$$",
+      "rating": "**** (4.5/5, 1,400+ reviews)",
+      "description": "Trendy DC spot for local food stalls, home goods, indie boutiques, and pop-up events in a warehouse-chic setting.",
+      "website": "https://unionmarketdc.com",
+      "address": "1309 5th St NE, Washington, DC 20002",
+      "good_for": "Trendy shopping, snacking"
+    },
+    {
+      "name": "The Village at Shirlington (Arlington)",
+      "category": "Boutique Shopping District",
+      "price": "$$",
+      "rating": "**** (4.3/5, 700+ reviews)",
+      "description": "Charming outdoor shopping district with gift shops, local stores, independent bookshops, and bistros just outside DC.",
+      "website": "https://villageatshirlington.com",
+      "address": "2700 S Quincy St, Arlington, VA 22206",
+      "good_for": "Walkable shops, relaxed afternoon"
+    },
+    {
+      "name": "Hampden (The Avenue) (Baltimore)",
+      "category": "Boutique Shopping",
+      "price": "$$",
+      "rating": "**** (4.5/5, 350+ reviews)",
+      "description": "Eclectic 36th Street corridor filled with indie shops, vintage treasures, quirky gifts, and funky local flavor.",
+      "website": "https://www.hampdenmerchants.com",
+      "address": "W 36th St, Baltimore, MD 21211",
+      "good_for": "Boutique shopping, artsy vibe"
+    }
+  ],
+  "casino_attractions": [
+    {
+      "name": "Horseshoe Casino Baltimore (Baltimore)",
+      "category": "Casino",
+      "price": "$$",
+      "rating": "**** (4.0/5, 2,200+ reviews)",
+      "description": "Large, lively casino offering poker, slots, table games, and celebrity chef restaurants like Gordon Ramsay Steak.",
+      "website": "https://www.caesars.com/horseshoe-baltimore",
+      "address": "1525 Russell St, Baltimore, MD 21230",
+      "good_for": "Evening fun, gaming, dinner"
+    },
+    {
+      "name": "MGM National Harbor (DC Area)",
+      "category": "Casino",
+      "price": "$$$",
+      "rating": "**** (4.0/5, 5,000+ reviews)",
+      "description": "Luxurious gaming, entertainment, and dining destination with river views, upscale shops, and high-stakes poker.",
+      "website": "https://www.mgmnationalharbor.com",
+      "address": "101 MGM National Ave, Oxon Hill, MD 20745",
+      "good_for": "Nightlife, high-end entertainment"
+    }
+  ]
+}

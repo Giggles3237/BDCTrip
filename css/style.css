@@ -1,0 +1,1109 @@
+/* 
+ * Main Stylesheet for Baltimore/DC Trip Website
+ * Created: May 2025
+ */
+
+/* ===== Base Styles ===== */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
+  --text-color: #333;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f9f9f9;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* ===== Header Styles ===== */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+
+/* ===== Navigation Styles ===== */
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: var(--secondary-color);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/georgetown-shopping-district-dc.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* ===== Welcome Section ===== */
+.welcome-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.welcome-text {
+  text-align: left;
+}
+
+.welcome-text p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.welcome-text ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.welcome-text ul li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.trip-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.highlight-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-card i {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+}
+
+.highlight-card h3 {
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.highlight-card p {
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* ===== Main Content ===== */
+main {
+  padding: 40px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  display: inline-block;
+}
+
+.section-title h2:after {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 4px;
+  background-color: var(--accent-color);
+  margin: 10px auto 0;
+}
+
+/* ===== Filters ===== */
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: var(--light-color);
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* ===== Cards Grid ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.card-category {
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.card-price {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-rating {
+  margin-bottom: 10px;
+  color: #f39c12;
+}
+
+.card-description {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.card-details {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.card-details p {
+  margin-bottom: 5px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ===== Voting System Styles ===== */
+.voting-section {
+  background-color: var(--light-color);
+  padding: 40px 0;
+  margin: 40px 0;
+  border-radius: var(--border-radius);
+}
+
+.voting-container {
+  text-align: center;
+}
+
+.voting-container h2 {
+  margin-bottom: 20px;
+}
+
+.voting-placeholder {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  border-radius: var(--border-radius);
+}
+
+/* Participant Selection */
+.participant-selection {
+  margin: 30px 0;
+  padding: 20px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.participant-selection h3 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.participant-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.participant-btn {
+  padding: 10px 15px;
+  background-color: var(--light-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.participant-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.participant-btn.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Voting Status */
+.voting-status {
+  margin: 30px 0;
+  padding: 20px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.voting-status h3 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.voting-status ul {
+  list-style: none;
+  margin: 15px 0;
+  text-align: left;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.voting-status ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.voting-status ul li:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--secondary-color);
+}
+
+.all-votes-used {
+  margin-top: 15px;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Vote Button */
+.btn-vote {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  padding: 8px 15px;
+  font-size: 0.9rem;
+}
+
+.btn-vote:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-vote.voted {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.btn-vote:disabled {
+  background-color: #ccc;
+  border-color: #aaa;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Charts */
+.voting-results {
+  margin: 40px 0;
+}
+
+.voting-results h3 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.chart-wrapper {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.chart-wrapper h4 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.chart-wrapper canvas {
+  width: 100%;
+  height: 300px;
+}
+
+/* ===== Schedule System Styles ===== */
+.schedule-section {
+  padding: 40px 0;
+  margin: 40px 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.schedule-container {
+  text-align: center;
+}
+
+/* Trip Details */
+.trip-details {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.trip-detail {
+  display: flex;
+  align-items: center;
+  background-color: var(--light-color);
+  padding: 15px 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.trip-detail i {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-right: 10px;
+}
+
+.trip-detail span {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Schedule Tabs */
+.schedule-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--light-color);
+  padding-bottom: 10px;
+}
+
+.schedule-tab {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-weight: 600;
+  transition: var(--transition);
+  background-color: var(--light-color);
+}
+
+.schedule-tab:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.schedule-tab.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Schedule Content */
+.schedule-content {
+  margin-bottom: 30px;
+}
+
+.schedule-day {
+  display: none;
+}
+
+.schedule-day.active {
+  display: block;
+}
+
+.schedule-day h3 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
+/* Time Slots */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.time-slot {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.time-slot.selecting {
+  box-shadow: 0 0 0 3px var(--secondary-color);
+}
+
+.time-slot-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-slot-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.time-slot-header .time-range {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.time-slot-content {
+  padding: 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-slot-content.empty {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.time-slot-content.empty p {
+  margin-bottom: 15px;
+  color: #777;
+}
+
+/* Scheduled Activity */
+.scheduled-activity {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.scheduled-activity .activity-img {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.scheduled-activity .activity-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scheduled-activity .activity-info {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.scheduled-activity .activity-info h4 {
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.scheduled-activity .activity-category {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.btn-remove-activity {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  transition: var(--transition);
+}
+
+.btn-remove-activity:hover {
+  transform: scale(1.2);
+}
+
+/* Schedule Actions */
+.schedule-actions {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Schedule Help */
+.schedule-help {
+  margin-top: 40px;
+  background-color: var(--light-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: left;
+}
+
+.schedule-help h4 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.schedule-help ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.schedule-help ul li {
+  margin-bottom: 8px;
+}
+
+/* Activity Selection Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: white;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.close-modal:hover {
+  color: var(--accent-color);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+/* Modal Tabs */
+.modal-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--light-color);
+  padding-bottom: 10px;
+}
+
+.modal-tab {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.modal-tab:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.modal-tab.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Modal Categories */
+.modal-category {
+  display: none;
+}
+
+.modal-category.active {
+  display: block;
+}
+
+/* Activity List */
+.activity-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid var(--light-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.activity-item:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.activity-item .activity-img {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.activity-item .activity-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activity-item .activity-info {
+  flex-grow: 1;
+}
+
+.activity-item .activity-info h4 {
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.activity-item .activity-category,
+.activity-item .activity-price {
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+.activity-item .activity-category {
+  color: var(--secondary-color);
+}
+
+.activity-item .activity-price {
+  color: var(--accent-color);
+}
+
+.activity-item .activity-votes {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.activity-item .activity-votes i {
+  color: var(--secondary-color);
+  margin-right: 3px;
+}
+
+.loading-activities {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 40px 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-section h3 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.footer-section p {
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 80%;
+    height: calc(100vh - 70px);
+    background-color: var(--primary-color);
+    transition: 0.3s;
+    z-index: 999;
+  }
+
+  nav.active {
+    left: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+  
+  .participant-buttons {
+    flex-direction: column;
+  }
+  
+  .participant-btn {
+    width: 100%;
+  }
+  
+  .trip-details {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .schedule-tabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .schedule-tab {
+    margin: 0;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .modal-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .trip-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .chart-wrapper canvas {
+    height: 250px;
+  }
+  
+  .scheduled-activity {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .scheduled-activity .activity-img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .scheduled-activity .activity-info {
+    text-align: center;
+  }
+  
+  .btn-remove-activity {
+    top: 5px;
+    right: 5px;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-item .activity-img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .activity-item .activity-info {
+    text-align: center;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+  }
+}
