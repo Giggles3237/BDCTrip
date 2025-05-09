@@ -6,6 +6,8 @@
  * to vote on their preferred attractions in each category.
  */
 
+const API_URL = 'https://your-app-name.azurewebsites.net';
+
 // Constants for voting limits per category
 const VOTING_LIMITS = {
     dining: 3,
@@ -15,13 +17,13 @@ const VOTING_LIMITS = {
 
 // Participant names (for the 7 participants)
 const PARTICIPANTS = [
-    "Participant 1",
-    "Participant 2",
-    "Participant 3",
-    "Participant 4",
-    "Participant 5",
-    "Participant 6",
-    "Participant 7"
+    "Muffin",
+    "Princess",
+    "Gigi",
+    "Aunt Robin",
+    "Dawn",
+    "The Driver",
+    "Last Minute Guest?"
 ];
 
 // Current active participant
