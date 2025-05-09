@@ -6,7 +6,7 @@
  * to vote on their preferred attractions in each category.
  */
 
-const API_URL = 'https://your-app-name.azurewebsites.net';
+const API_URL = 'https://bdctripbackend-52c6ab7d2006.herokuapp.com';
 
 // Constants for voting limits per category
 const VOTING_LIMITS = {
@@ -28,6 +28,9 @@ const PARTICIPANTS = [
 
 // Current active participant
 let currentParticipant = null;
+
+// Store votes in memory after fetching from backend
+let backendVotes = [];
 
 /**
  * Initialize the voting system
@@ -218,44 +221,120 @@ function addVotingButtonToCard(card, category) {
 }
 
 /**
- * Update the state of all voting buttons based on current participant's votes
+ * Helper to fetch all votes from backend
  */
-function updateVotingButtonsState() {
+async function fetchBackendVotes() {
+    try {
+        const response = await fetch(`${API_URL}/votes`);
+        backendVotes = await response.json();
+    } catch (err) {
+        backendVotes = [];
+        console.error('Failed to fetch votes from backend:', err);
+    }
+}
+
+/**
+ * Helper to get votes for a participant from backendVotes
+ * @param {number} participantIndex - Index of the participant
+ * @returns {Array} - Array of attraction IDs the participant has voted for
+ */
+function getParticipantVotes(participantIndex) {
+    if (!backendVotes) return [];
+    const participantName = PARTICIPANTS[participantIndex];
+    return backendVotes
+        .filter(v => v.participant === participantName)
+        .map(v => v.attraction_id);
+}
+
+/**
+ * Helper to get all votes for all attractions from backendVotes
+ * @returns {Object} - Object with attraction IDs as keys and vote counts as values
+ */
+function getAllVotes() {
+    const allVotes = {};
+    backendVotes.forEach(vote => {
+        if (allVotes[vote.attraction_id]) {
+            allVotes[vote.attraction_id]++;
+        } else {
+            allVotes[vote.attraction_id] = 1;
+        }
+    });
+    return allVotes;
+}
+
+/**
+ * Helper to get votes by category from backendVotes
+ * @param {string} category - Category to filter by (dining, shopping, casino)
+ * @returns {Object} - Object with attraction IDs as keys and vote counts as values
+ */
+function getVotesByCategory(category) {
+    const categoryVotes = {};
+    backendVotes.forEach(vote => {
+        if (vote.category === category) {
+            if (categoryVotes[vote.attraction_id]) {
+                categoryVotes[vote.attraction_id]++;
+            } else {
+                categoryVotes[vote.attraction_id] = 1;
+            }
+        }
+    });
+    return categoryVotes;
+}
+
+/**
+ * Add a vote for a participant (send to backend)
+ * @param {number} participantIndex - Index of the participant
+ * @param {string} attractionId - ID of the attraction
+ * @param {string} category - Category of the attraction
+ */
+async function addVote(participantIndex, attractionId, category) {
+    const participantName = PARTICIPANTS[participantIndex];
+    try {
+        await fetch(`${API_URL}/vote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ participant: participantName, attractionId, category })
+        });
+        await fetchBackendVotes();
+    } catch (err) {
+        alert('Failed to submit vote. Please try again.');
+        console.error(err);
+    }
+}
+
+/**
+ * Remove a vote for a participant (not supported by backend, so just alert)
+ * @param {number} participantIndex - Index of the participant
+ * @param {string} attractionId - ID of the attraction
+ */
+function removeVote(participantIndex, attractionId) {
+    alert('Removing votes is not supported in the backend version.');
+}
+
+/**
+ * Update voting buttons state (must be async to wait for backend votes)
+ */
+async function updateVotingButtonsState() {
     if (currentParticipant === null) return;
-    
+    await fetchBackendVotes();
     const voteButtons = document.querySelectorAll('.btn-vote');
     const participantVotes = getParticipantVotes(currentParticipant);
-    
     voteButtons.forEach(button => {
         const attractionId = button.dataset.id;
         const category = button.dataset.category;
-        
-        // Check if participant has already voted for this attraction
         const hasVoted = participantVotes.includes(attractionId);
-        
-        // Check if participant has reached voting limit for this category
-        const categoryVotes = participantVotes.filter(vote => {
-            // Match first letter of ID with category (D for dining, S for shopping, C for casino)
-            const voteCategory = vote.charAt(0);
-            return (category === 'dining' && voteCategory === 'D') || 
-                   (category === 'shopping' && voteCategory === 'S') || 
-                   (category === 'casino' && voteCategory === 'C');
-        }).length;
-        
+        // Count votes for this category
+        const categoryVotes = backendVotes.filter(v => v.participant === PARTICIPANTS[currentParticipant] && v.category === category).length;
         const reachedLimit = categoryVotes >= VOTING_LIMITS[category];
-        
-        // Update button state
         if (hasVoted) {
             button.classList.add('voted');
             button.innerHTML = '<i class="fas fa-check"></i> Voted';
         } else {
             button.classList.remove('voted');
             button.innerHTML = '<i class="fas fa-thumbs-up"></i> Vote';
-            
-            // Disable if reached limit
             if (reachedLimit) {
                 button.disabled = true;
-                button.title = `You've used all your ${category} votes`;
+                button.title = `You\'ve used all your ${category} votes`;
             } else {
                 button.disabled = false;
                 button.title = '';
@@ -265,152 +344,33 @@ function updateVotingButtonsState() {
 }
 
 /**
- * Toggle a vote for an attraction
+ * Toggle a vote for an attraction (async)
  * @param {string} attractionId - ID of the attraction
  * @param {string} category - Category of the attraction
  */
-function toggleVote(attractionId, category) {
+async function toggleVote(attractionId, category) {
     if (currentParticipant === null) {
         alert('Please select your name before voting.');
         return;
     }
-    
+    await fetchBackendVotes();
     const participantVotes = getParticipantVotes(currentParticipant);
     const hasVoted = participantVotes.includes(attractionId);
-    
     if (hasVoted) {
-        // Remove vote
-        removeVote(currentParticipant, attractionId);
+        removeVote(currentParticipant, attractionId); // Not supported
     } else {
-        // Check if participant has reached voting limit for this category
-        const categoryVotes = participantVotes.filter(vote => {
-            // Match first letter of ID with category (D for dining, S for shopping, C for casino)
-            const voteCategory = vote.charAt(0);
-            return (category === 'dining' && voteCategory === 'D') || 
-                   (category === 'shopping' && voteCategory === 'S') || 
-                   (category === 'casino' && voteCategory === 'C');
-        }).length;
-        
+        // Count votes for this category
+        const categoryVotes = backendVotes.filter(v => v.participant === PARTICIPANTS[currentParticipant] && v.category === category).length;
         if (categoryVotes >= VOTING_LIMITS[category]) {
-            alert(`You've already used all your ${category} votes (${VOTING_LIMITS[category]} maximum).`);
+            alert(`You\'ve already used all your ${category} votes (${VOTING_LIMITS[category]} maximum).`);
             return;
         }
-        
-        // Add vote
-        addVote(currentParticipant, attractionId);
+        await addVote(currentParticipant, attractionId, category);
     }
-    
-    // Update UI
     updateVotingStatus();
     updateVotingButtonsState();
     updateVotingSummary();
-    
-    // Update charts
     updateCharts();
-}
-
-/**
- * Get votes for a participant from localStorage
- * @param {number} participantIndex - Index of the participant
- * @returns {Array} - Array of attraction IDs the participant has voted for
- */
-function getParticipantVotes(participantIndex) {
-    const votesKey = `participant_${participantIndex}_votes`;
-    const votesJson = localStorage.getItem(votesKey);
-    
-    if (votesJson) {
-        return JSON.parse(votesJson);
-    }
-    
-    return [];
-}
-
-/**
- * Add a vote for a participant
- * @param {number} participantIndex - Index of the participant
- * @param {string} attractionId - ID of the attraction
- */
-function addVote(participantIndex, attractionId) {
-    const votes = getParticipantVotes(participantIndex);
-    
-    // Check if already voted
-    if (votes.includes(attractionId)) {
-        return;
-    }
-    
-    // Add vote
-    votes.push(attractionId);
-    
-    // Save to localStorage
-    const votesKey = `participant_${participantIndex}_votes`;
-    localStorage.setItem(votesKey, JSON.stringify(votes));
-    
-    console.log(`Added vote for ${attractionId} by ${PARTICIPANTS[participantIndex]}`);
-}
-
-/**
- * Remove a vote for a participant
- * @param {number} participantIndex - Index of the participant
- * @param {string} attractionId - ID of the attraction
- */
-function removeVote(participantIndex, attractionId) {
-    const votes = getParticipantVotes(participantIndex);
-    
-    // Remove vote
-    const updatedVotes = votes.filter(id => id !== attractionId);
-    
-    // Save to localStorage
-    const votesKey = `participant_${participantIndex}_votes`;
-    localStorage.setItem(votesKey, JSON.stringify(updatedVotes));
-    
-    console.log(`Removed vote for ${attractionId} by ${PARTICIPANTS[participantIndex]}`);
-}
-
-/**
- * Get all votes for all attractions
- * @returns {Object} - Object with attraction IDs as keys and vote counts as values
- */
-function getAllVotes() {
-    const allVotes = {};
-    
-    // Loop through all participants
-    for (let i = 0; i < PARTICIPANTS.length; i++) {
-        const participantVotes = getParticipantVotes(i);
-        
-        // Count votes for each attraction
-        participantVotes.forEach(attractionId => {
-            if (allVotes[attractionId]) {
-                allVotes[attractionId]++;
-            } else {
-                allVotes[attractionId] = 1;
-            }
-        });
-    }
-    
-    return allVotes;
-}
-
-/**
- * Get votes by category
- * @param {string} category - Category to filter by (dining, shopping, casino)
- * @returns {Object} - Object with attraction IDs as keys and vote counts as values
- */
-function getVotesByCategory(category) {
-    const allVotes = getAllVotes();
-    const categoryVotes = {};
-    
-    // Filter by category based on ID prefix
-    Object.keys(allVotes).forEach(attractionId => {
-        const prefix = attractionId.charAt(0);
-        
-        if ((category === 'dining' && prefix === 'D') || 
-            (category === 'shopping' && prefix === 'S') || 
-            (category === 'casino' && prefix === 'C')) {
-            categoryVotes[attractionId] = allVotes[attractionId];
-        }
-    });
-    
-    return categoryVotes;
 }
 
 /**
@@ -465,3 +425,6 @@ window.votingSystem = {
     PARTICIPANTS,
     VOTING_LIMITS
 };
+
+// On page load, fetch backend votes
+window.addEventListener('DOMContentLoaded', fetchBackendVotes);
