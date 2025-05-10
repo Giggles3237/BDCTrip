@@ -8,9 +8,9 @@
 
 // Trip dates
 const TRIP_DATES = [
+    new Date(2025, 5, 16), // June 16, 2025
     new Date(2025, 5, 17), // June 17, 2025
-    new Date(2025, 5, 18), // June 18, 2025
-    new Date(2025, 5, 19)  // June 19, 2025
+    new Date(2025, 5, 18)  // June 18, 2025
 ];
 
 // Time slots for each day
@@ -140,7 +140,7 @@ function createScheduleInterface() {
             <div class="trip-details">
                 <div class="trip-detail">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>June 17-19, 2025</span>
+                    <span>June 16-18, 2025</span>
                 </div>
                 <div class="trip-detail">
                     <i class="fas fa-map-marker-alt"></i>
@@ -153,13 +153,51 @@ function createScheduleInterface() {
             </div>
             
             <div class="schedule-tabs">
-                <div class="schedule-tab active" data-date="2025-06-17">June 17</div>
+                <div class="schedule-tab active" data-date="2025-06-16">June 16</div>
+                <div class="schedule-tab" data-date="2025-06-17">June 17</div>
                 <div class="schedule-tab" data-date="2025-06-18">June 18</div>
-                <div class="schedule-tab" data-date="2025-06-19">June 19</div>
             </div>
             
             <div class="schedule-content">
-                <div class="schedule-day active" id="schedule-2025-06-17">
+                <div class="schedule-day active" id="schedule-2025-06-16">
+                    <h3>Monday, June 16, 2025</h3>
+                    <div class="time-slots">
+                        <div class="time-slot" data-date="2025-06-16" data-slot="morning">
+                            <div class="time-slot-header">
+                                <h4>Morning</h4>
+                                <span class="time-range">8:00 AM - 12:00 PM</span>
+                            </div>
+                            <div class="time-slot-content empty">
+                                <p>No activity scheduled yet</p>
+                                <button class="btn btn-schedule">Add Activity</button>
+                            </div>
+                        </div>
+                        
+                        <div class="time-slot" data-date="2025-06-16" data-slot="afternoon">
+                            <div class="time-slot-header">
+                                <h4>Afternoon</h4>
+                                <span class="time-range">12:00 PM - 5:00 PM</span>
+                            </div>
+                            <div class="time-slot-content empty">
+                                <p>No activity scheduled yet</p>
+                                <button class="btn btn-schedule">Add Activity</button>
+                            </div>
+                        </div>
+                        
+                        <div class="time-slot" data-date="2025-06-16" data-slot="evening">
+                            <div class="time-slot-header">
+                                <h4>Evening</h4>
+                                <span class="time-range">5:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="time-slot-content empty">
+                                <p>No activity scheduled yet</p>
+                                <button class="btn btn-schedule">Add Activity</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="schedule-day" id="schedule-2025-06-17">
                     <h3>Tuesday, June 17, 2025</h3>
                     <div class="time-slots">
                         <div class="time-slot" data-date="2025-06-17" data-slot="morning">
@@ -223,44 +261,6 @@ function createScheduleInterface() {
                         </div>
                         
                         <div class="time-slot" data-date="2025-06-18" data-slot="evening">
-                            <div class="time-slot-header">
-                                <h4>Evening</h4>
-                                <span class="time-range">5:00 PM - 10:00 PM</span>
-                            </div>
-                            <div class="time-slot-content empty">
-                                <p>No activity scheduled yet</p>
-                                <button class="btn btn-schedule">Add Activity</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="schedule-day" id="schedule-2025-06-19">
-                    <h3>Thursday, June 19, 2025</h3>
-                    <div class="time-slots">
-                        <div class="time-slot" data-date="2025-06-19" data-slot="morning">
-                            <div class="time-slot-header">
-                                <h4>Morning</h4>
-                                <span class="time-range">8:00 AM - 12:00 PM</span>
-                            </div>
-                            <div class="time-slot-content empty">
-                                <p>No activity scheduled yet</p>
-                                <button class="btn btn-schedule">Add Activity</button>
-                            </div>
-                        </div>
-                        
-                        <div class="time-slot" data-date="2025-06-19" data-slot="afternoon">
-                            <div class="time-slot-header">
-                                <h4>Afternoon</h4>
-                                <span class="time-range">12:00 PM - 5:00 PM</span>
-                            </div>
-                            <div class="time-slot-content empty">
-                                <p>No activity scheduled yet</p>
-                                <button class="btn btn-schedule">Add Activity</button>
-                            </div>
-                        </div>
-                        
-                        <div class="time-slot" data-date="2025-06-19" data-slot="evening">
                             <div class="time-slot-header">
                                 <h4>Evening</h4>
                                 <span class="time-range">5:00 PM - 10:00 PM</span>
@@ -682,14 +682,14 @@ function autoScheduleActivities() {
     
     // Initialize schedule data
     scheduleData = {
+        '2025-06-16': {},
         '2025-06-17': {},
-        '2025-06-18': {},
-        '2025-06-19': {}
+        '2025-06-18': {}
     };
     
     // Day 1
     if (sortedShopping[0]) {
-        scheduleData['2025-06-17'].morning = {
+        scheduleData['2025-06-16'].morning = {
             id: sortedShopping[0].id,
             name: sortedShopping[0].name,
             category: sortedShopping[0].category,
@@ -698,7 +698,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedShopping[1]) {
-        scheduleData['2025-06-17'].afternoon = {
+        scheduleData['2025-06-16'].afternoon = {
             id: sortedShopping[1].id,
             name: sortedShopping[1].name,
             category: sortedShopping[1].category,
@@ -707,7 +707,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedDining[0]) {
-        scheduleData['2025-06-17'].evening = {
+        scheduleData['2025-06-16'].evening = {
             id: sortedDining[0].id,
             name: sortedDining[0].name,
             category: sortedDining[0].category,
@@ -717,7 +717,7 @@ function autoScheduleActivities() {
     
     // Day 2
     if (sortedDining[1]) {
-        scheduleData['2025-06-18'].morning = {
+        scheduleData['2025-06-17'].morning = {
             id: sortedDining[1].id,
             name: sortedDining[1].name,
             category: sortedDining[1].category,
@@ -726,7 +726,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedCasino[0]) {
-        scheduleData['2025-06-18'].afternoon = {
+        scheduleData['2025-06-17'].afternoon = {
             id: sortedCasino[0].id,
             name: sortedCasino[0].name,
             category: sortedCasino[0].category,
@@ -735,7 +735,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedDining[2]) {
-        scheduleData['2025-06-18'].evening = {
+        scheduleData['2025-06-17'].evening = {
             id: sortedDining[2].id,
             name: sortedDining[2].name,
             category: sortedDining[2].category,
@@ -745,7 +745,7 @@ function autoScheduleActivities() {
     
     // Day 3
     if (sortedDining[3]) {
-        scheduleData['2025-06-19'].morning = {
+        scheduleData['2025-06-18'].morning = {
             id: sortedDining[3].id,
             name: sortedDining[3].name,
             category: sortedDining[3].category,
@@ -754,7 +754,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedShopping[2]) {
-        scheduleData['2025-06-19'].afternoon = {
+        scheduleData['2025-06-18'].afternoon = {
             id: sortedShopping[2].id,
             name: sortedShopping[2].name,
             category: sortedShopping[2].category,
@@ -763,7 +763,7 @@ function autoScheduleActivities() {
     }
     
     if (sortedDining[4]) {
-        scheduleData['2025-06-19'].evening = {
+        scheduleData['2025-06-18'].evening = {
             id: sortedDining[4].id,
             name: sortedDining[4].name,
             category: sortedDining[4].category,

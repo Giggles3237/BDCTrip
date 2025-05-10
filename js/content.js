@@ -178,7 +178,6 @@ function createCard(name, category, price, rating, description, imagePath, id, w
             </div>
             <div class="card-actions">
                 <a href="${website}" class="btn btn-outline" target="_blank">Visit Website</a>
-                <button class="btn" onclick="showDetails('${id}')">More Details</button>
             </div>
         </div>
     `;

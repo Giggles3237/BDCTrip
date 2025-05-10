@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baltimore/DC Trip Planner | June 17-19, 2025</title>
+    <title>Baltimore/DC Trip Planner | June 16-18, 2025</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏙️</text></svg>">
@@ -42,14 +42,36 @@
         </div>
     </header>
     
+    <!-- Name Selection (moved to top) -->
+    <section id="participant-select" class="participant-select-section">
+        <div class="container">
+            <div class="participant-selection">
+                <h3>Select Your Name</h3>
+                <div class="participant-buttons" id="participant-buttons-top"></div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <h1>Baltimore/DC Area Trip</h1>
-            <p>Join us for an exciting adventure in the Baltimore/DC area from June 17-19, 2025. Explore the best dining, shopping, and entertainment options with our group of 7!</p>
+            <p>Join us for an exciting adventure in the Baltimore/DC area from June 16-18, 2025. Explore the best dining, shopping, and entertainment options with our group of 7!</p>
             <div class="hero-buttons">
                 <a href="#schedule" class="btn">View Schedule</a>
                 <a href="#dining" class="btn btn-outline">Explore Attractions</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Voting Section (moved up) -->
+    <section id="voting" class="voting-section">
+        <div class="container voting-container">
+            <h2>Vote for Your Favorites</h2>
+            <p>Help us plan our itinerary by voting for your favorite attractions!</p>
+            <div class="voting-placeholder">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading voting system...</p>
             </div>
         </div>
     </section>
@@ -64,7 +86,7 @@
             
             <div class="welcome-content">
                 <div class="welcome-text">
-                    <p>This interactive website is designed to help our group of 7 plan and organize our upcoming trip to the Baltimore/DC area from June 17-19, 2025. Here you can:</p>
+                    <p>This interactive website is designed to help our group of 7 plan and organize our upcoming trip to the Baltimore/DC area from June 16-18, 2025. Here you can:</p>
                     <ul>
                         <li>Browse top-rated dining, shopping, and casino attractions</li>
                         <li>Vote for your favorite places to visit</li>
@@ -78,7 +100,7 @@
                     <div class="highlight-card">
                         <i class="fas fa-calendar-alt"></i>
                         <h3>Trip Dates</h3>
-                        <p>June 17-19, 2025<br>Tuesday - Thursday</p>
+                        <p>June 16-18, 2025<br>Monday - Wednesday</p>
                     </div>
                     
                     <div class="highlight-card">
@@ -172,18 +194,6 @@
         
         <!-- Schedule Section -->
         <!-- This section will be created dynamically by schedule.js -->
-        
-        <!-- Voting Section -->
-        <section id="voting" class="voting-section">
-            <div class="container voting-container">
-                <h2>Vote for Your Favorites</h2>
-                <p>Help us plan our itinerary by voting for your favorite attractions!</p>
-                <div class="voting-placeholder">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading voting system...</p>
-                </div>
-            </div>
-        </section>
     </main>
     
     <!-- Footer -->
@@ -192,7 +202,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Trip Details</h3>
-                    <p><i class="fas fa-calendar-alt"></i> June 17-19, 2025</p>
+                    <p><i class="fas fa-calendar-alt"></i> June 16-18, 2025</p>
                     <p><i class="fas fa-map-marker-alt"></i> Baltimore/DC Area</p>
                     <p><i class="fas fa-users"></i> 7 Participants</p>
                 </div>

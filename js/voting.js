@@ -76,26 +76,38 @@ function createVotingInterface() {
     votingContainer.innerHTML = `
         <h2>Vote for Your Favorites</h2>
         <p>Help plan our itinerary by voting for your preferred attractions!</p>
-        
-        <div class="participant-selection">
+        <div class="voting-status" id="voting-status">
+            <p>Please select your name to start voting.</p>
+        </div>
+        <div id="voting-summary"></div>
+    `;
+
+    // Render participant buttons in both top and voting sections
+    renderParticipantButtons();
+}
+
+function renderParticipantButtons() {
+    // Render in the voting section (if present)
+    const votingSection = document.querySelector('.voting-container .participant-selection');
+    if (votingSection) {
+        votingSection.innerHTML = `
             <h3>Select Your Name</h3>
             <div class="participant-buttons" id="participant-buttons">
                 ${PARTICIPANTS.map((name, index) => 
                     `<button class="participant-btn" data-participant="${index}">${name}</button>`
                 ).join('')}
             </div>
-        </div>
-        
-        <div class="voting-status" id="voting-status">
-            <p>Please select your name to start voting.</p>
-        </div>
-        
-        <div id="voting-summary"></div>
-    `;
-    
-    // Add event listeners to participant buttons
-    const participantButtons = document.querySelectorAll('.participant-btn');
-    participantButtons.forEach(button => {
+        `;
+    }
+    // Render at the top of the page
+    const topButtonsDiv = document.getElementById('participant-buttons-top');
+    if (topButtonsDiv) {
+        topButtonsDiv.innerHTML = PARTICIPANTS.map((name, index) => 
+            `<button class="participant-btn" data-participant="${index}">${name}</button>`
+        ).join('');
+    }
+    // Add event listeners to all participant buttons
+    document.querySelectorAll('.participant-btn').forEach(button => {
         button.addEventListener('click', async function() {
             const participantIndex = this.dataset.participant;
             await selectParticipant(participantIndex);
@@ -303,12 +315,23 @@ async function addVote(participantIndex, attractionId, category) {
 }
 
 /**
- * Remove a vote for a participant (not supported by backend, so just alert)
+ * Remove a vote for a participant (send DELETE request to backend)
  * @param {number} participantIndex - Index of the participant
  * @param {string} attractionId - ID of the attraction
+ * @param {string} category - Category of the attraction
  */
-function removeVote(participantIndex, attractionId) {
-    alert('Removing votes is not supported in the backend version.');
+async function removeVote(participantIndex, attractionId, category) {
+    const participantName = PARTICIPANTS[participantIndex];
+    try {
+        await fetch(`${API_URL}/vote`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ participant: participantName, attractionId, category })
+        });
+    } catch (err) {
+        alert('Failed to remove vote. Please try again.');
+        console.error(err);
+    }
 }
 
 /**
@@ -357,19 +380,14 @@ async function toggleVote(attractionId, category) {
     const participantVotes = getParticipantVotes(currentParticipant);
     const hasVoted = participantVotes.some(vote => vote.attraction_id === attractionId && vote.category === category);
     if (hasVoted) {
-        removeVote(currentParticipant, attractionId); // Not supported
+        // Remove vote (send DELETE request)
+        await removeVote(currentParticipant, attractionId, category);
+        await fetchBackendVotes();
     } else {
-        // Count votes for this category
-        const categoryVotes = participantVotes.filter(vote => vote.category === category).length;
-        if (categoryVotes >= VOTING_LIMITS[category]) {
-            alert(`You've already used all your ${category} votes (${VOTING_LIMITS[category]} maximum).`);
-            return;
-        }
+        // No vote limit check!
         await addVote(currentParticipant, attractionId, category);
-        // Fetch and update UI after voting
         await fetchBackendVotes();
     }
-    // UI will update after fetchBackendVotes
     updateCharts();
 }
 
