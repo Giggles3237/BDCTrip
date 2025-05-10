@@ -96,9 +96,9 @@ function createVotingInterface() {
     // Add event listeners to participant buttons
     const participantButtons = document.querySelectorAll('.participant-btn');
     participantButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', async function() {
             const participantIndex = this.dataset.participant;
-            selectParticipant(participantIndex);
+            await selectParticipant(participantIndex);
         });
     });
 }
@@ -107,7 +107,7 @@ function createVotingInterface() {
  * Select a participant and update the UI
  * @param {string} participantIndex - Index of the selected participant
  */
-function selectParticipant(participantIndex) {
+async function selectParticipant(participantIndex) {
     currentParticipant = parseInt(participantIndex);
     
     // Update UI to show selected participant
@@ -120,13 +120,8 @@ function selectParticipant(participantIndex) {
         }
     });
     
-    // Update voting status
-    updateVotingStatus();
-    
-    // Update voting buttons on cards
-    updateVotingButtonsState();
-    
-    updateVotingSummary();
+    // Fetch latest votes and update UI
+    await fetchBackendVotes();
     
     console.log(`Selected participant: ${PARTICIPANTS[currentParticipant]}`);
 }
@@ -136,19 +131,14 @@ function selectParticipant(participantIndex) {
  */
 function updateVotingStatus() {
     if (currentParticipant === null) return;
-    
     const votingStatus = document.getElementById('voting-status');
     if (!votingStatus) return;
-    
     const participantName = PARTICIPANTS[currentParticipant];
+    // Use deduplicated votes
     const votes = getParticipantVotes(currentParticipant);
-    
-    // Count votes by category
-    const diningVotes = votes.filter(vote => vote.startsWith('D')).length;
-    const shoppingVotes = votes.filter(vote => vote.startsWith('S')).length;
-    const casinoVotes = votes.filter(vote => vote.startsWith('C')).length;
-    
-    // Create status message
+    const diningVotes = votes.filter(vote => vote.category === 'dining').length;
+    const shoppingVotes = votes.filter(vote => vote.category === 'shopping').length;
+    const casinoVotes = votes.filter(vote => vote.category === 'casino').length;
     votingStatus.innerHTML = `
         <h3>Hello, ${participantName}!</h3>
         <p>Your voting status:</p>
@@ -158,8 +148,6 @@ function updateVotingStatus() {
             <li>Casino: ${casinoVotes}/${VOTING_LIMITS.casino} votes used</li>
         </ul>
     `;
-    
-    // If they've used all their votes, add a message
     if (diningVotes >= VOTING_LIMITS.dining && 
         shoppingVotes >= VOTING_LIMITS.shopping && 
         casinoVotes >= VOTING_LIMITS.casino) {
@@ -225,25 +213,37 @@ function addVotingButtonToCard(card, category) {
  */
 async function fetchBackendVotes() {
     try {
-        const response = await fetch(`${API_URL}/votes`);
+        const response = await fetch(`${API_URL}/votes/raw`);
         backendVotes = await response.json();
     } catch (err) {
         backendVotes = [];
         console.error('Failed to fetch votes from backend:', err);
+    }
+    // Update the UI after fetching votes
+    updateVotingSummary();
+    if (currentParticipant !== null) {
+        updateVotingStatus();
+        updateVotingButtonsState();
     }
 }
 
 /**
  * Helper to get votes for a participant from backendVotes
  * @param {number} participantIndex - Index of the participant
- * @returns {Array} - Array of attraction IDs the participant has voted for
+ * @returns {Array} - Array of vote objects the participant has voted for
  */
 function getParticipantVotes(participantIndex) {
     if (!backendVotes) return [];
     const participantName = PARTICIPANTS[participantIndex];
+    const seen = new Set();
     return backendVotes
         .filter(v => v.participant === participantName)
-        .map(v => v.attraction_id);
+        .filter(v => {
+            const key = v.attraction_id + '|' + v.category;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
 }
 
 /**
@@ -314,17 +314,18 @@ function removeVote(participantIndex, attractionId) {
 /**
  * Update voting buttons state (must be async to wait for backend votes)
  */
-async function updateVotingButtonsState() {
+function updateVotingButtonsState() {
     if (currentParticipant === null) return;
-    await fetchBackendVotes();
     const voteButtons = document.querySelectorAll('.btn-vote');
+    // Use deduplicated votes
     const participantVotes = getParticipantVotes(currentParticipant);
     voteButtons.forEach(button => {
         const attractionId = button.dataset.id;
         const category = button.dataset.category;
-        const hasVoted = participantVotes.includes(attractionId);
+        // Check if participant has already voted for this attraction in this category
+        const hasVoted = participantVotes.some(vote => vote.attraction_id === attractionId && vote.category === category);
         // Count votes for this category
-        const categoryVotes = backendVotes.filter(v => v.participant === PARTICIPANTS[currentParticipant] && v.category === category).length;
+        const categoryVotes = participantVotes.filter(vote => vote.category === category).length;
         const reachedLimit = categoryVotes >= VOTING_LIMITS[category];
         if (hasVoted) {
             button.classList.add('voted');
@@ -334,7 +335,7 @@ async function updateVotingButtonsState() {
             button.innerHTML = '<i class="fas fa-thumbs-up"></i> Vote';
             if (reachedLimit) {
                 button.disabled = true;
-                button.title = `You\'ve used all your ${category} votes`;
+                button.title = `You've used all your ${category} votes`;
             } else {
                 button.disabled = false;
                 button.title = '';
@@ -353,23 +354,22 @@ async function toggleVote(attractionId, category) {
         alert('Please select your name before voting.');
         return;
     }
-    await fetchBackendVotes();
     const participantVotes = getParticipantVotes(currentParticipant);
-    const hasVoted = participantVotes.includes(attractionId);
+    const hasVoted = participantVotes.some(vote => vote.attraction_id === attractionId && vote.category === category);
     if (hasVoted) {
         removeVote(currentParticipant, attractionId); // Not supported
     } else {
         // Count votes for this category
-        const categoryVotes = backendVotes.filter(v => v.participant === PARTICIPANTS[currentParticipant] && v.category === category).length;
+        const categoryVotes = participantVotes.filter(vote => vote.category === category).length;
         if (categoryVotes >= VOTING_LIMITS[category]) {
-            alert(`You\'ve already used all your ${category} votes (${VOTING_LIMITS[category]} maximum).`);
+            alert(`You've already used all your ${category} votes (${VOTING_LIMITS[category]} maximum).`);
             return;
         }
         await addVote(currentParticipant, attractionId, category);
+        // Fetch and update UI after voting
+        await fetchBackendVotes();
     }
-    updateVotingStatus();
-    updateVotingButtonsState();
-    updateVotingSummary();
+    // UI will update after fetchBackendVotes
     updateCharts();
 }
 
